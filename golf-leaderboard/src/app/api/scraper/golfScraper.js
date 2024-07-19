@@ -1,5 +1,5 @@
-import fetch from "node-fetch";
-import { load } from "cheerio";
+const fetch = require("node-fetch");
+const cheerio = require("cheerio");
 
 async function scrapeGolfScores() {
   const url = "https://www.espn.com/golf/leaderboard";
@@ -20,29 +20,33 @@ async function scrapeGolfScores() {
     { name: "2e", golfer: "Viktor Hovland", score: 0 },
     { name: "Reid", golfer: "Bryson DeChambeau", score: 0 },
     { name: "Bug", golfer: "Tommy Fleetwood", score: 0 },
-    { name: "Layton", golfer: "Rory McIlroy", score: 0 },
+    { name: "Topping", golfer: "Rory McIlroy", score: 0 },
   ];
 
   try {
     const response = await fetch(url, { headers });
-    if (!response.ok) {
+    console.log(`Status Code: ${response.status}`); // Log status code
+    if (response.status !== 200) {
+      console.error(
+        `Failed to retrieve the golf stats page. Status code: ${response.status}`
+      );
       return {
         error: `Failed to retrieve the golf stats page. Status code: ${response.status}`,
       };
     }
 
     const body = await response.text();
-    const $ = load(body);
+    const $ = cheerio.load(body);
     const leaderboardEntries = $("tr.PlayerRow__Overview");
-
     const golferScores = {};
-    leaderboardEntries.each((i, entry) => {
-      const golferNameTag = $(entry).find("a.leaderboard_player_name");
-      const scoreTag = $(entry).find("td").eq(4);
 
-      if (golferNameTag.length && scoreTag.length) {
-        const golferName = golferNameTag.text().trim();
-        const score = scoreTag.text().trim();
+    leaderboardEntries.each((index, element) => {
+      const golferName = $(element)
+        .find("a.leaderboard_player_name")
+        .text()
+        .trim();
+      const score = $(element).find("td").eq(3).text().trim(); // Assuming the score is in the 4th <td>
+      if (golferName && score) {
         golferScores[golferName] = score;
       }
     });
@@ -54,11 +58,12 @@ async function scrapeGolfScores() {
       }
     });
 
+    console.log("Scraped teams:", teams); // Log scraped data
     return teams;
   } catch (error) {
-    console.error(`Error fetching leaderboard: ${error} f`);
-    return { error: `Error fetching leaderboard: ${error}` };
+    console.error(`Error fetching data: ${error.message}`);
+    return { error: `Error fetching data: ${error.message}` };
   }
 }
 
-export default scrapeGolfScores;
+module.exports = scrapeGolfScores;
