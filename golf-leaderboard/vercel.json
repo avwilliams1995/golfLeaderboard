@@ -1,18 +1,14 @@
 {
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    },
-    {
-      "src": "src/app/api/scraper/route.ts",
-      "use": "@vercel/node"
+  "version": 2,
+  "functions": {
+    "src/app/api/scraper/route.ts": {
+      "runtime": "vercel-nodejs@2.14.0"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/scraper",
-      "dest": "/api/scraper/route.ts"
+      "dest": "/src/app/api/scraper/route.ts"
     }
   ]
 }
