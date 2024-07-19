@@ -71,9 +71,8 @@ interface Team {
 
     console.log("Scraping successful, returning data:", teams);
     const responseHeaders = {
-      "Content-Type": "application/json",
-      "Cache-Control":
-        "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0'
     };
     return new NextResponse(JSON.stringify(teams), {
       status: 200,
