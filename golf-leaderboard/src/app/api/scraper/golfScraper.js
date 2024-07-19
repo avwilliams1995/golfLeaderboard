@@ -38,7 +38,7 @@ async function scrapeGolfScores() {
     const golferScores = {};
     leaderboardEntries.each((i, entry) => {
       const golferNameTag = $(entry).find("a.leaderboard_player_name");
-      const scoreTag = $(entry).find("td").eq(3);
+      const scoreTag = $(entry).find("td").eq(4);
 
       if (golferNameTag.length && scoreTag.length) {
         const golferName = golferNameTag.text().trim();
