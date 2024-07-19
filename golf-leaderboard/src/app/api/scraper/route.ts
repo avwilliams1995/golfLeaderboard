@@ -1,38 +1,44 @@
-import { NextRequest, NextResponse } from "next/server";
-import { spawn } from "child_process";
+import { NextResponse } from "next/server";
+import { exec } from "child_process";
 import path from "path";
 
-export async function GET(request: NextRequest): Promise<void | NextResponse> {
-  return new Promise((resolve, reject) => {
-    const pythonScriptPath = path.resolve(
+export async function GET() {
+  return new Promise((resolve) => {
+    const pythonScriptPath = path.join(
       process.cwd(),
       "scripts",
       "golfScraper.py"
     );
-    const pythonProcess = spawn("python3", [pythonScriptPath]);
 
-    let dataString = "";
-
-    pythonProcess.stdout.on("data", (data) => {
-      dataString += data.toString();
-    });
-
-    pythonProcess.stdout.on("end", () => {
-      try {
-        const result = JSON.parse(dataString);
-        resolve(NextResponse.json(result));
-      } catch (err) {
-        reject(new Error(`Error parsing JSON: ${err}`));
+    exec(`python3 ${pythonScriptPath}`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error executing Python script: ${error.message}`);
+        return resolve(
+          new Response(`Error executing Python script: ${error.message}`, {
+            status: 500,
+          })
+        );
       }
-    });
+      if (stderr) {
+        console.error(`Python script stderr: ${stderr}`);
+        return resolve(
+          new Response(`Python script stderr: ${stderr}`, { status: 500 })
+        );
+      }
 
-    pythonProcess.stderr.on("data", (data) => {
-      reject(new Error(`Error in fetchData controller: ${data.toString()}`));
-    });
-
-    pythonProcess.on("close", (code) => {
-      if (code !== 0) {
-        reject(new Error(`Python process exited with code ${code}`));
+      try {
+        const data = JSON.parse(stdout);
+        return resolve(new NextResponse(JSON.stringify(data), { status: 200 }));
+      } catch (jsonError) {
+        console.error(
+          `Error parsing JSON from Python script`
+        );
+        return resolve(
+          new Response(
+            `Error parsing JSON from Python script: `,
+            { status: 500 }
+          )
+        );
       }
     });
   });
