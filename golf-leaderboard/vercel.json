@@ -14,5 +14,15 @@
       "src": "/api/scraper",
       "dest": "/api/scraper/route.ts"
     }
-  ]
+  ],
+  "functions": {
+    "api/scraper": {
+      "runtime": "python3",
+      "handler": "scripts/golfScraper.py",
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  },
+  "buildCommand": "pip install -r scripts/requirements.txt && npm run build"
 }
