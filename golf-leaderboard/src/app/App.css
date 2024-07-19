@@ -3,14 +3,14 @@
 
 .responsive-image {
     width: 100%;
-    max-width: 200px;
+    max-width: 180px;
     height: auto;
 
   }
 
   @media (max-width: 600px) {
     .responsive-image {
-      width: 150px;
+      width: 100px;
     }
   }
 
@@ -92,7 +92,7 @@ body {
 }
 
 img {
-  margin: 10px;
+  margin: 5px;
 }
 
 .App-link {
