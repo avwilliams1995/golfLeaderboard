@@ -20,7 +20,7 @@ async function scrapeGolfScores() {
     { name: "2e", golfer: "Viktor Hovland", score: 0 },
     { name: "Reid", golfer: "Bryson DeChambeau", score: 0 },
     { name: "Bug", golfer: "Tommy Fleetwood", score: 0 },
-    { name: "Topping", golfer: "Rory McIlroy", score: 0 },
+    { name: "Layton", golfer: "Rory McIlroy", score: 0 },
   ];
 
   try {
