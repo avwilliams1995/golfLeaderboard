@@ -1,5 +1,5 @@
-const fetch = require("node-fetch");
-const cheerio = require("cheerio");
+import fetch from "node-fetch";
+import { load } from "cheerio";
 
 async function scrapeGolfScores() {
   const url = "https://www.espn.com/golf/leaderboard";
@@ -36,7 +36,7 @@ async function scrapeGolfScores() {
     }
 
     const body = await response.text();
-    const $ = cheerio.load(body);
+    const $ = load(body);
     const leaderboardEntries = $("tr.PlayerRow__Overview");
     const golferScores = {};
 
@@ -66,4 +66,4 @@ async function scrapeGolfScores() {
   }
 }
 
-module.exports = scrapeGolfScores;
+export default scrapeGolfScores;
