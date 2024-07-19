@@ -1,5 +1,17 @@
 {
-  "version": 2,
-  "builds": [{ "src": "package.json", "use": "@vercel/next" }],
-  "routes": [{ "src": "/api/(.*)", "dest": "/api/$1" }]
+  "builds": [
+    {
+      "src": "src/app/api/scraper/route.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/scraper",
+      "dest": "/api/scraper"
+    }
+  ],
+  "env": {
+    "PYTHON_VERSION": "3.9.7"
+  }
 }

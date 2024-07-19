@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "postbuild": "curl https://pyenv.run | bash && pyenv install 3.9.7 && pyenv global 3.9.7"
   },
   "dependencies": {
     "next": "latest",
