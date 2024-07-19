@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import scrapeGolfScores from "./golfScraper.js";
+import scrapeGolfScores from "./golfScraper";
 
 export async function GET(request: NextRequest) {
   console.log("GET request received at /api/scraper");

@@ -2,6 +2,8 @@ import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
 
 const scrapeGolfScores = async () => {
+  console.log("Starting golf scores scrape...");
+
   const url = "https://www.espn.com/golf/leaderboard";
   const headers = {
     "User-Agent":
