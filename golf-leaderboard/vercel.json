@@ -8,10 +8,12 @@
   "routes": [
     {
       "src": "/api/scraper",
-      "dest": "/api/scraper"
+      "dest": "/src/app/api/scraper/route.ts"
     }
   ],
-  "env": {
-    "PYTHON_VERSION": "3.9.7"
+  "functions": {
+    "api/scraper/route.ts": {
+      "runtime": "python3.9"
+    }
   }
 }

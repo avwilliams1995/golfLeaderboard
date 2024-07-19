@@ -3,14 +3,9 @@ import { spawn } from "child_process";
 import path from "path";
 
 export async function GET(request: NextRequest) {
+  console.log("GET request received");
   const scriptPath = path.resolve("scripts/golfScraper.py");
-  console.log(`Executing Python script at path: ${scriptPath}`);
-
-  // Log Python version
-  const pythonVersionProcess = spawn("python3", ["--version"]);
-  pythonVersionProcess.stdout.on("data", (data) => {
-    console.log(`Python version: ${data}`);
-  });
+  console.log(`Script path: ${scriptPath}`);
 
   const pythonProcess = spawn("python3", [scriptPath]);
 
@@ -27,12 +22,11 @@ export async function GET(request: NextRequest) {
     });
 
     pythonProcess.on("close", (code) => {
+      console.log(`Python script exited with code ${code}`);
       if (code !== 0) {
-        console.error(`Python script exited with code ${code}`);
         reject(new Error(`Python script exited with code ${code}`));
       } else {
         try {
-          console.log(`Python script result: ${result}`);
           const parsedResult = JSON.parse(result);
           resolve(new Response(JSON.stringify(parsedResult), { status: 200 }));
         } catch (err) {
