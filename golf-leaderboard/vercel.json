@@ -6,7 +6,10 @@
     },
     {
       "src": "src/app/api/scraper/route.ts",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["scripts/**"]
+      }
     }
   ],
   "routes": [
@@ -15,14 +18,5 @@
       "dest": "/api/scraper/route.ts"
     }
   ],
-  "functions": {
-    "api/scraper": {
-      "runtime": "python3",
-      "handler": "scripts/golfScraper.py",
-      "env": {
-        "PYTHONUNBUFFERED": "1"
-      }
-    }
-  },
-  "buildCommand": "pip install -r scripts/requirements.txt && npm run build"
+  "installCommand": "pip install -r scripts/requirements.txt && npm install"
 }
