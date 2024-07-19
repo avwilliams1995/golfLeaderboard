@@ -45,7 +45,7 @@ async function scrapeGolfScores() {
         .find("a.leaderboard_player_name")
         .text()
         .trim();
-      const score = $(element).find("td").eq(3).text().trim(); // Assuming the score is in the 4th <td>
+      const score = $(element).find("td").eq(4).text().trim(); // Assuming the score is in the 4th <td>
       if (golferName && score) {
         golferScores[golferName] = score;
       }
