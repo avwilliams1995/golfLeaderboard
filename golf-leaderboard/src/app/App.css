@@ -1,0 +1,147 @@
+/* App.css */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  
+
+}
+
+.spinner {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+  margin-top: 50px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  /* background-color: green; */
+  background-color: #282c34;
+  
+}
+
+/* .App-logo {
+  height: 40vmin;
+  pointer-events: none;
+} */
+
+.App-header {
+  margin-top: 30px;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 1vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.Leaderboard-table-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.Leaderboard-table {
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px 0;
+  border-collapse: collapse;
+}
+
+.Leaderboard-table th,
+.Leaderboard-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.Leaderboard-table th {
+  background-color: #4caf50;
+  color: white;
+}
+
+.Leaderboard-table td {
+  width: 33.33%;
+}
+
+.Leaderboard-table th {
+  width: 33.33%;
+}
+
+.Leaderboard-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+  color: black;
+}
+
+.Leaderboard-table tr:hover {
+  background-color: #acaaaa;
+}
+
+h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #61dafb;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  /* margin-top: 30px; */
+  text-align: center;
+}
+
+button {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #4caf50;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:active {
+  transform: scale(0.95);
+}

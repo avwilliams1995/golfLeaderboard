@@ -1,0 +1,31 @@
+/* src/app/page.module.css */
+.container {
+  padding: 2rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.leaderboardTableContainer {
+  margin-top: 2rem;
+}
+
+.leaderboardTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboardTable th,
+.leaderboardTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.leaderboardTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4caf50;
+  color: white;
+}
