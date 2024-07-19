@@ -56,7 +56,7 @@ async function scrapeGolfScores() {
 
     return teams;
   } catch (error) {
-    console.error(`Error fetching leaderboard: ${error}`);
+    console.error(`Error fetching leaderboard: ${error} f`);
     return { error: `Error fetching leaderboard: ${error}` };
   }
 }
