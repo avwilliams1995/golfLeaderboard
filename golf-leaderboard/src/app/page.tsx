@@ -44,11 +44,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h2>Travel League Gahlf</h2>
-        <img
-          src="/2e.png"
-          alt="2e"
-          style={{ width: "200px", height: "auto" }}
-        />
+        <div id="2div">
+          <img src="/2e.png" alt="2e" className="responsive-image" />
+          <img src="/2e-2.png" alt="2e" className="responsive-image" />
+          <img src="/2e-3.png" alt="2e" className="responsive-image" />
+        </div>
 
         <button onClick={fetchLeaderboard} disabled={loading}>
           {loading ? "Loading..." : "Refresh Leaderboard"}
