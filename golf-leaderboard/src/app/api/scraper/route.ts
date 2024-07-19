@@ -70,7 +70,15 @@ interface Team {
     });
 
     console.log("Scraping successful, returning data:", teams);
-    return new NextResponse(JSON.stringify(teams), { status: 200 });
+    const responseHeaders = {
+      "Content-Type": "application/json",
+      "Cache-Control":
+        "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+    };
+    return new NextResponse(JSON.stringify(teams), {
+      status: 200,
+      headers: responseHeaders,
+    });
   } catch (error) {
     console.error("Error in fetchData controller:", error);
     return new NextResponse("Error in fetchData controller", { status: 500 });
