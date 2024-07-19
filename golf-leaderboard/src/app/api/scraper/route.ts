@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { exec } from "child_process";
 import path from "path";
 
-export async function GET() {
+export async function GET(): Promise<void | NextResponse> {
   return new Promise((resolve) => {
     const pythonScriptPath = path.join(
       process.cwd(),
@@ -14,7 +14,7 @@ export async function GET() {
       if (error) {
         console.error(`Error executing Python script: ${error.message}`);
         return resolve(
-          new Response(`Error executing Python script: ${error.message}`, {
+          new NextResponse(`Error executing Python script: ${error.message}`, {
             status: 500,
           })
         );
@@ -22,7 +22,7 @@ export async function GET() {
       if (stderr) {
         console.error(`Python script stderr: ${stderr}`);
         return resolve(
-          new Response(`Python script stderr: ${stderr}`, { status: 500 })
+          new NextResponse(`Python script stderr: ${stderr}`, { status: 500 })
         );
       }
 
@@ -31,10 +31,10 @@ export async function GET() {
         return resolve(new NextResponse(JSON.stringify(data), { status: 200 }));
       } catch (jsonError) {
         console.error(
-          `Error parsing JSON from Python script`
+          `Error parsing JSON from Python script: `
         );
         return resolve(
-          new Response(
+          new NextResponse(
             `Error parsing JSON from Python script: `,
             { status: 500 }
           )
