@@ -15,7 +15,7 @@ function App() {
     console.log('fetching')
     setLoading(true);
     try {
-      const response = await fetch("/api/scraper", { cache: "no-store" });
+      const response = await fetch("/api/scraper", { method: "POST" });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

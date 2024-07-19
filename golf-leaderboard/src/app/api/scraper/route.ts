@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import fetch from "node-fetch";
 import { JSDOM } from "jsdom";
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   console.log("GET request received at /api/scraper");
 
   const url = "https://www.espn.com/golf/leaderboard";
