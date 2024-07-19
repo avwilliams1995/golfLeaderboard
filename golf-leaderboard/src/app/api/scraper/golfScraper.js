@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
-import { load } from "cheerio";
+import { JSDOM } from "jsdom";
 
-async function scrapeGolfScores() {
+const scrapeGolfScores = async () => {
   const url = "https://www.espn.com/golf/leaderboard";
   const headers = {
     "User-Agent":
@@ -23,47 +23,39 @@ async function scrapeGolfScores() {
     { name: "Topping", golfer: "Rory McIlroy", score: 0 },
   ];
 
-  try {
-    const response = await fetch(url, { headers });
-    console.log(`Status Code: ${response.status}`); // Log status code
-    if (response.status !== 200) {
-      console.error(
-        `Failed to retrieve the golf stats page. Status code: ${response.status}`
-      );
-      return {
-        error: `Failed to retrieve the golf stats page. Status code: ${response.status}`,
-      };
-    }
-
-    const body = await response.text();
-    const $ = load(body);
-    const leaderboardEntries = $("tr.PlayerRow__Overview");
-    const golferScores = {};
-
-    leaderboardEntries.each((index, element) => {
-      const golferName = $(element)
-        .find("a.leaderboard_player_name")
-        .text()
-        .trim();
-      const score = $(element).find("td").eq(4).text().trim(); // Assuming the score is in the 4th <td>
-      if (golferName && score) {
-        golferScores[golferName] = score;
-      }
-    });
-
-    teams.forEach((team) => {
-      const golferName = team.golfer;
-      if (golferName in golferScores) {
-        team.score = golferScores[golferName];
-      }
-    });
-
-    console.log("Scraped teams:", teams); // Log scraped data
-    return teams;
-  } catch (error) {
-    console.error(`Error fetching data: ${error.message}`);
-    return { error: `Error fetching data: ${error.message}` };
+  const response = await fetch(url, { headers });
+  if (response.status !== 200) {
+    throw new Error(
+      `Failed to retrieve the golf stats page. Status code: ${response.status}`
+    );
   }
-}
+
+  const text = await response.text();
+  const dom = new JSDOM(text);
+  const { document } = dom.window;
+  const leaderboardEntries = document.querySelectorAll(
+    "tr.PlayerRow__Overview"
+  );
+
+  const golferScores = {};
+  leaderboardEntries.forEach((entry) => {
+    const golferNameTag = entry.querySelector("a.leaderboard_player_name");
+    const scoreTag = entry.querySelector("td:nth-child(4)");
+    if (golferNameTag && scoreTag) {
+      const golferName = golferNameTag.textContent.trim();
+      const score = scoreTag.textContent.trim();
+      golferScores[golferName] = score;
+    }
+  });
+
+  teams.forEach((team) => {
+    const golferName = team.golfer;
+    if (golferName in golferScores) {
+      team.score = golferScores[golferName];
+    }
+  });
+
+  return teams;
+};
 
 export default scrapeGolfScores;
