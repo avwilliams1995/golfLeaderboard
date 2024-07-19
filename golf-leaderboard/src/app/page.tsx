@@ -12,6 +12,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchLeaderboard = async () => {
+    console.log('fetching')
     setLoading(true);
     try {
       const response = await fetch("/api/scraper");
@@ -25,6 +26,7 @@ function App() {
         const scoreB = b.score === "E" ? 0 : Number(b.score);
         return scoreA - scoreB;
       });
+      console.log('got new data', sortedData)
 
       setTeams(sortedData);
       setLoading(false);
