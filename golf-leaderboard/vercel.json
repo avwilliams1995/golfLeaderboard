@@ -6,10 +6,7 @@
     },
     {
       "src": "src/app/api/scraper/route.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["scripts/**"]
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -18,5 +15,5 @@
       "dest": "/api/scraper/route.ts"
     }
   ],
-  "installCommand": "pip install -r scripts/requirements.txt && npm install"
+  "installCommand": "pip install -r requirements.txt && npm install"
 }
