@@ -3,17 +3,10 @@
     {
       "src": "src/app/api/scraper/route.ts",
       "use": "@vercel/node"
-    }
-  ],
-  "routes": [
+    },
     {
-      "src": "/api/scraper",
-      "dest": "/src/app/api/scraper/route.ts"
+      "src": "next.config.mjs",
+      "use": "@vercel/next"
     }
-  ],
-  "functions": {
-    "api/scraper/route.ts": {
-      "runtime": "python3.9"
-    }
-  }
+  ]
 }
