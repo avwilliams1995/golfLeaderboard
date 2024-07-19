@@ -1,12 +1,18 @@
 {
   "builds": [
     {
-      "src": "src/app/api/scraper/route.ts",
-      "use": "@vercel/node"
+      "src": "package.json",
+      "use": "@vercel/next"
     },
     {
-      "src": "next.config.mjs",
-      "use": "@vercel/next"
+      "src": "src/app/api/scraper/route.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/scraper",
+      "dest": "/api/scraper/route.ts"
     }
   ]
 }
