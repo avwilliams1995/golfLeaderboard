@@ -126,11 +126,11 @@ img {
 }
 
 .Leaderboard-table td {
-  width: 33.33%;
+  width: 25%;
 }
 
 .Leaderboard-table th {
-  width: 33.33%;
+  width: 25%;
 }
 
 .Leaderboard-table tr:nth-child(even) {

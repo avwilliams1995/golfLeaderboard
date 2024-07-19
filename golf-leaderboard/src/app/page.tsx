@@ -5,6 +5,7 @@ interface Team {
   name: string;
   golfer: string;
   score: number | string;
+  thru?: number | string;
 }
 
 function App() {
@@ -20,13 +21,14 @@ function App() {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
+      console.log('got data', data)
 
       const sortedData = data.sort((a: Team, b: Team) => {
         const scoreA = a.score === "E" ? 0 : Number(a.score);
         const scoreB = b.score === "E" ? 0 : Number(b.score);
         return scoreA - scoreB;
       });
-      console.log('got new data', sortedData)
+
 
       setTeams(sortedData);
     } catch (error) {
@@ -39,6 +41,7 @@ function App() {
   useEffect(() => {
     fetchLeaderboard();
   }, []);
+  console.log('teams', teams)
 
   return (
     <div className="App">
@@ -63,6 +66,7 @@ function App() {
                   <th>Team Name</th>
                   <th>Golfer</th>
                   <th>Score</th>
+                  <th>Thru</th>
                 </tr>
               </thead>
               <tbody>
@@ -71,6 +75,7 @@ function App() {
                     <td>{team.name}</td>
                     <td>{team.golfer}</td>
                     <td>{team.score}</td>
+                    <td>{team.thru}</td>
                   </tr>
                 ))}
               </tbody>
