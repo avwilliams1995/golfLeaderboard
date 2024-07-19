@@ -1,11 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "child_process";
 import path from "path";
 
-export async function GET() {
-  const pythonScriptPath = path.resolve("./scripts/golfScraper.py");
-
+export async function GET(request: NextRequest): Promise<void | NextResponse> {
   return new Promise((resolve, reject) => {
+    const pythonScriptPath = path.resolve(
+      process.cwd(),
+      "scripts",
+      "golfScraper.py"
+    );
     const pythonProcess = spawn("python3", [pythonScriptPath]);
 
     let dataString = "";
@@ -14,23 +17,22 @@ export async function GET() {
       dataString += data.toString();
     });
 
+    pythonProcess.stdout.on("end", () => {
+      try {
+        const result = JSON.parse(dataString);
+        resolve(NextResponse.json(result));
+      } catch (err) {
+        reject(new Error(`Error parsing JSON: ${err}`));
+      }
+    });
+
     pythonProcess.stderr.on("data", (data) => {
-      console.error(`stderr: ${data}`);
-      reject(new Error(`Python script error: ${data.toString()}`));
+      reject(new Error(`Error in fetchData controller: ${data.toString()}`));
     });
 
     pythonProcess.on("close", (code) => {
       if (code !== 0) {
-        console.error(`Python process exited with code ${code}`);
         reject(new Error(`Python process exited with code ${code}`));
-      } else {
-        try {
-          const result = JSON.parse(dataString);
-          resolve(NextResponse.json(result));
-        } catch (err) {
-          console.error(`Error parsing JSON: ${err}`);
-          reject(new Error(`Error parsing JSON: ${err}`));
-        }
       }
     });
   });
