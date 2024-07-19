@@ -40,7 +40,7 @@ const scrapeGolfScores = async () => {
   const golferScores = {};
   leaderboardEntries.forEach((entry) => {
     const golferNameTag = entry.querySelector("a.leaderboard_player_name");
-    const scoreTag = entry.querySelector("td:nth-child(4)");
+    const scoreTag = entry.querySelector("td:nth-child(5)");
     if (golferNameTag && scoreTag) {
       const golferName = golferNameTag.textContent.trim();
       const score = scoreTag.textContent.trim();
