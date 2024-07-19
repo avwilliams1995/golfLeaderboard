@@ -29,7 +29,6 @@ function App() {
       console.log('got new data', sortedData)
 
       setTeams(sortedData);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching leaderboard:", error);
     } finally {
