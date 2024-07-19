@@ -5,6 +5,7 @@
     width: 100%;
     max-width: 200px;
     height: auto;
+
   }
 
   @media (max-width: 600px) {
@@ -83,7 +84,7 @@ body {
 
 /* Remove the empty ruleset */
 
-#2div{
+#twodiv{
   display: flex;
   justify-content: center;
   align-items: center;

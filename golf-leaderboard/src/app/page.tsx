@@ -44,7 +44,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h2>Travel League Gahlf</h2>
-        <div id="2div">
+        <div id="twodiv">
           <img src="/2e.png" alt="2e" className="responsive-image" />
           <img src="/2e-2.png" alt="2e" className="responsive-image" />
           <img src="/2e-3.png" alt="2e" className="responsive-image" />
