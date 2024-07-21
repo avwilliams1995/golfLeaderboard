@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+
 import { Inter } from "next/font/google";
-import "./App.css"; // Ensure this path is correct and points to your App.css file
+import "./App.css";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
+export const metadata: any = {
   title: "Travel League Gahlf",
   description: "Golf leaderboard",
 };
@@ -16,6 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+      </Head>
       <body className={inter.className}>{children}</body>
     </html>
   );

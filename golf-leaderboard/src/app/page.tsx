@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 interface Team {
   name: string;
@@ -13,7 +14,6 @@ function App() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchLeaderboard = async () => {
-    console.log('fetching')
     setLoading(true);
     try {
       const response = await fetch("/api/scraper", { method: "POST" });
@@ -41,16 +41,33 @@ function App() {
   useEffect(() => {
     fetchLeaderboard();
   }, []);
-  console.log('teams', teams)
 
   return (
     <div className="App">
       <header className="App-header">
         <h2>Travel League Gahlf</h2>
         <div id="twodiv">
-          <img src="/2e.png" alt="2e" className="responsive-image" />
-          <img src="/2e-2.png" alt="2e" className="responsive-image" />
-          <img src="/2e-3.png" alt="2e" className="responsive-image" />
+          <Image
+            src="/2e.png"
+            alt="2e"
+            width={500}
+            height={300}
+            className="responsive-image"
+          />
+          <Image
+            src="/2e-2.png"
+            alt="2e"
+            width={500}
+            height={300}
+            className="responsive-image"
+          />
+          <Image
+            src="/2e-3.png"
+            alt="2e"
+            width={500}
+            height={300}
+            className="responsive-image"
+          />
         </div>
 
         <button onClick={fetchLeaderboard} disabled={loading}>

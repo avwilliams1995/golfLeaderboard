@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     name: string;
     golfer: string;
     score: number | string;
-    thru?: number | string;
+    thru: number | string;
   }
 
   const teams: Team[] = [
