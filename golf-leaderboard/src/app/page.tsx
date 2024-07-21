@@ -46,7 +46,7 @@ function App() {
       <Head>
         <link rel="preload" href="/2e.png" as="image" />
         <link rel="preload" href="/2e-2.png" as="image" />
-        <link rel="preload" href="/2e-3.png" as="image" />
+        <link rel="preload" href="/2e-3.jpeg" as="image" />
         <title>Travel League Gahlf</title>
         <meta name="description" content="Golf leaderboard" />
       </Head>
@@ -70,7 +70,7 @@ function App() {
             loading="eager"
           />
           <Image
-            src="/2e-3.png"
+            src="/2e-3.jpeg"
             alt="2e"
             width={500}
             height={300}

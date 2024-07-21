@@ -21,7 +21,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="preload" href="/2e.png" as="image" />
         <link rel="preload" href="/2e-2.png" as="image" />
-        <link rel="preload" href="/2e-3.png" as="image" />
+        <link rel="preload" href="/2e-3.jpeg" as="image" />
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
       </Head>
