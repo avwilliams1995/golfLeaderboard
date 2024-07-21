@@ -13,6 +13,22 @@ function App() {
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const customSort = (a: Team, b: Team) => {
+    // Check for "CUT" or "Suggit" in team names or scores
+    const aHasCutOrSuggit = a.score === "CUT" || a.name.includes("Suggit");
+    const bHasCutOrSuggit = b.score === "CUT" || b.name.includes("Suggit");
+
+
+    if (aHasCutOrSuggit && !bHasCutOrSuggit) return 1;
+    if (!aHasCutOrSuggit && bHasCutOrSuggit) return -1;
+
+
+    const scoreA = a.score === "E" ? 0 : Number(a.score);
+    const scoreB = b.score === "E" ? 0 : Number(b.score);
+    return scoreA - scoreB;
+  };
+
+
   const fetchLeaderboard = async () => {
     setLoading(true);
     try {
@@ -23,12 +39,7 @@ function App() {
       const data = await response.json();
       console.log("got data", data);
 
-      const sortedData = data.sort((a: Team, b: Team) => {
-        const scoreA = a.score === "E" ? 0 : Number(a.score);
-        const scoreB = b.score === "E" ? 0 : Number(b.score);
-        return scoreA - scoreB;
-      });
-
+      const sortedData = data.sort(customSort);
       setTeams(sortedData);
     } catch (error) {
       console.error("Error fetching leaderboard:", error);
