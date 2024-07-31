@@ -78,7 +78,7 @@ export async function POST(request: NextRequest) {
           if (golferName === "Viktor Hovland") {
             golferScores.push({
               score: finalScoreString,
-              thru: "Suggit",
+              thru: "--",
               name: golferName,
             });
           } else {
